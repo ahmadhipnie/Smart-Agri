@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('landing_page');
 });
 
-Route::get('/map', function () {
-    return view('map');
-});
+Route::get('/dashboard', function () {
+    return view('layout.navigation');
+})->name('dashboard');
+
+Route::get('/cuaca', function () {
+    return view('cuaca.index');
+})->name('cuaca');
