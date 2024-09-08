@@ -16,9 +16,8 @@ use App\Http\Controllers\PetaRekomendasiControllerr;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_page');
 });
-
 Route::get('/dashboard', function () {
     return view('layout.navigation');
 })->name('dashboard');
@@ -28,4 +27,3 @@ Route::get('/cuaca', function () {
 })->name('cuaca');
 
 Route::get('/peta-rekomendasi', [PetaRekomendasiController::class, 'index'])->name('peta');
-
