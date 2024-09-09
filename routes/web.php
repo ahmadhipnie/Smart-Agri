@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\PetaRekomendasiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PetaRekomendasiControllerr;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +18,9 @@ use App\Http\Controllers\PetaRekomendasiControllerr;
 Route::get('/', function () {
     return view('landing_page');
 });
-Route::get('/dashboard', function () {
-    return view('layout.navigation');
-})->name('dashboard');
 
-Route::get('/cuaca', function () {
-    return view('cuaca.index');
-})->name('cuaca');
+Route::prefix('detail')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    });
 
 Route::get('/peta-rekomendasi', [PetaRekomendasiController::class, 'index'])->name('peta');
