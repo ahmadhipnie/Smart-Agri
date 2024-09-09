@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\JenisTanamanController;
+use App\Http\Controllers\backend\HasilUjiTanamanController;
 use App\Http\Controllers\PetaRekomendasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::get('/', function () {
 Route::prefix('detail')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
+    Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
     });
 
 Route::get('/peta-rekomendasi', [PetaRekomendasiController::class, 'index'])->name('peta');

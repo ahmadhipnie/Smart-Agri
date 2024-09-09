@@ -12,7 +12,7 @@
 					<span class="nav-text">Jenis Tanaman Pangan</span>
 				</a>
 			</li>
-			<li><a href="#" aria-expanded="false">
+			<li><a href="{{route ('hasilujitanaman')}}" aria-expanded="false">
 					<!-- <i class="flaticon-381-controls-3"></i> -->
 					<span class="nav-text">Hasil Uji Tanaman Pangan</span>
 				</a>
