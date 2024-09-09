@@ -7,7 +7,7 @@
 					<span class="nav-text">Dashboard</span>
 				</a>
 			</li>
-			<li><a href="#" aria-expanded="false">
+			<li><a href="{{route ('jenistanaman')}}" aria-expanded="false">
 					<!-- <i class="flaticon-381-television"></i> -->
 					<span class="nav-text">Jenis Tanaman Pangan</span>
 				</a>

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class DashboardController extends Controller
+class JenisTanamanController extends Controller
 {
     public function index()
-    {
-        return view('backend.dashboard.index');
+    {    
+        return view('backend.jenistanaman.index');
     }
 }
