@@ -17,7 +17,7 @@
 					<span class="nav-text">Hasil Uji Tanaman Pangan</span>
 				</a>
 			</li>
-			<li><a href="#" aria-expanded="false">
+			<li><a href="{{route ('daerahrawan')}}" aria-expanded="false">
 					<!-- <i class="flaticon-381-internet"></i> -->
 					<span class="nav-text">Daerah Rawan Pangan</span>
 				</a>
