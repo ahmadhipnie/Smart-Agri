@@ -22,7 +22,7 @@
 					<span class="nav-text">Daerah Rawan Pangan</span>
 				</a>
 			</li>
-			<li><a href="#" aria-expanded="false">
+			<li><a href="{{route ('prediksipanen')}}" aria-expanded="false">
 					<!-- <i class="flaticon-381-internet"></i> -->
 					<span class="nav-text">Prediksi Panen</span>
 				</a>
