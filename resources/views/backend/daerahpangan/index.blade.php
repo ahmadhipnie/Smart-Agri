@@ -34,28 +34,21 @@
     <div class="col-xl-12 p-2">
     <div class="card">
         <div class="card-body">
-            <form method="GET" action="{{ route('filter.bulan') }}">
-                <div class="form-group">
-                    <label for="month">Pilih Bulan:</label>
-                    <div class="d-flex align-items-center">
-                        <select name="month" id="month" class="form-control mr-2" style="width: 200px;">
-                            <option value="1">Januari</option>
-                            <option value="2">Februari</option>
-                            <option value="3">Maret</option>
-                            <option value="4">April</option>
-                            <option value="5">Mei</option>
-                            <option value="6">Juni</option>
-                            <option value="7">Juli</option>
-                            <option value="8">Agustus</option>
-                            <option value="9">September</option>
-                            <option value="10">Oktober</option>
-                            <option value="11">November</option>
-                            <option value="12">Desember</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
-                </div>
-            </form>
+        <form method="GET" action="{{ route('filter.tahun') }}">
+    <div class="form-group">
+        <label for="year">Pilih Tahun:</label>
+        <div class="d-flex align-items-center">
+            <select name="year" id="year" class="form-control mr-2" style="width: 200px;">
+                @for ($i = 2016; $i <= 2026; $i++)
+                    <option value="{{ $i }}" {{ $i == request('year', 2016) ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </div>
+</form>
+
+
         </div>
     </div>
 </div>

@@ -30,9 +30,7 @@ Route::prefix('detail')->group(function () {
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
     Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
     Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerah.rawan.pangan');
-    Route::get('/daerah-rawan-pangan/filter', [DaerahRawanPanganController::class, 'filter'])->name('filter.bulan');
-
-
+    Route::get('/daerah-rawan-pangan/filter-tahun', [DaerahRawanPanganController::class, 'filter'])->name('filter.tahun');
 
     });
 
