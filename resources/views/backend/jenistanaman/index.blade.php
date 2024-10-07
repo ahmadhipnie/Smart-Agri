@@ -80,11 +80,11 @@
 <div class="col-xl-11 mx-auto p-2 card">
     <div style="height: 130px;" class="d-flex align-items-center" style="background-color: #b8dcb8;">
         <div class="gambar mr-3">
-            <img src="{{ asset('backend/images/ubi.jpg') }}" alt="Padi" width="130px" height="130px" style="border-radius: 10px;">
+            <img src="{{ asset('backend/images/kedelai.jpeg') }}" alt="Padi" width="130px" height="130px" style="border-radius: 10px;">
         </div>
         <div class="text">
-            <p>Pada Ubi bulan Januari sangat cocok untuk ditanami, karena ubi membutuhkan tanah yang lembab dan air yang banyak untuk tumbuh dengan optimal.</p>
-            <p style="font-weight: bold;">Prediksi panen ubi sekitar 90-105 hari</p>
+            <p>Pada Kedelai bulan Januari sangat cocok untuk ditanami, karena kedelai membutuhkan cuaca yang kering untuk tumbuh dengan optimal.</p>
+            <p style="font-weight: bold;">Prediksi panen kedelai sekitar 90-105 hari</p>
         </div>
     </div>
 </div>
