@@ -5,46 +5,47 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PrediksiCuacaController extends Controller
 {
     public function index()
-    {    
+    {
         $provinces = $this->getProvincesAndCities();
-    
+
         return view('backend.cuaca.index', compact('provinces'));
     }
-    
-    
+
+
     public function fetchWeatherData(Request $request)
     {
         $provinsi = $request->input('provinsi');
         $kabupaten = $request->input('kabupaten');
         $bulan = str_pad($request->input('bulan'), 2, '0', STR_PAD_LEFT);
         $tahun = $request->input('tahun');
-    
+
         $startDate = "$tahun-$bulan-01";
         $endDate = "$tahun-$bulan-" . cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun);
-    
+
         $apiKey = '293N98Y9M2J6Y6XPLLERL8XQ2'; //ganti api key yang baru dari buat akun(biar bisa)
         $url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/$kabupaten/$startDate/$endDate?unitGroup=metric&key=$apiKey&contentType=json";
-    
+
         $response = Http::get($url);
-    
-        \Log::info('Request URL: ' . $url);
-        \Log::info('Response Status: ' . $response->status());
-        \Log::info('Response Body: ' . $response->body());
-    
+
+        Log::info('Request URL: ' . $url);
+        Log::info('Response Status: ' . $response->status());
+        Log::info('Response Body: ' . $response->body());
+
         $weatherData = $response->json();
-    
+
         $cityName = $weatherData['address'] ?? 'Kota tidak diketahui';
-    
+
         $provinces = $this->getProvincesAndCities();
 
         return view('backend.cuaca.index', compact('weatherData', 'cityName', 'provinces'));
     }
-    
-    
+
+
     public function getProvincesAndCities()
 {
     $data = [
@@ -226,8 +227,8 @@ class PrediksiCuacaController extends Controller
             'Sorong',
         ],
     ];
-    
+
     return $data;
-    
+
 }
 }

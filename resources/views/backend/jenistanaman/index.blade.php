@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <div class="row">
     <div class="col-xl-12">
-    <div class="card">
+        <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center">
                 <form action="" class="d-flex justify-content-between w-100 flex-wrap">

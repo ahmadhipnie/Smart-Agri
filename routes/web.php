@@ -30,8 +30,12 @@ Route::prefix('detail')->group(function () {
     Route::post('/prediksi-cuaca/fetch', [PrediksiCuacaController::class, 'fetchWeatherData'])->name('cuaca.fetch');
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
     Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
-    Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerahrawan');
+    // Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerahrawan');
     Route::get('/prediksi-panen', [PrediksiPanenController::class, 'index'])->name('prediksipanen');
+    Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerah.rawan.pangan');
+    Route::get('/daerah-rawan-pangan/filter', [DaerahRawanPanganController::class, 'filter'])->name('filter.bulan');
+
+
 
     });
 
