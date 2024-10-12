@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('detail')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/prediksi-cuaca', [PrediksiCuacaController::class, 'index'])->name('prediksicuaca');
     Route::post('/prediksi-cuaca/fetch', [PrediksiCuacaController::class, 'fetchWeatherData'])->name('cuaca.fetch');
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
