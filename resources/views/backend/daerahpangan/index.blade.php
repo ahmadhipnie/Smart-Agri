@@ -31,40 +31,33 @@
 
 <div class="content-body">
     <div class="container-fluid">
-    <div class="col-xl-12 p-2">
-    <div class="card">
-        <div class="card-body">
-        <form method="GET" action="{{ route('filter.tahun') }}">
-    <div class="form-group">
-        <label for="year">Pilih Tahun:</label>
-        <div class="d-flex align-items-center">
-            <select name="year" id="year" class="form-control mr-2" style="width: 200px;">
-                @for ($i = 2016; $i <= 2026; $i++)
-                    <option value="{{ $i }}" {{ $i == request('year', 2016) ? 'selected' : '' }}>{{ $i }}</option>
-                @endfor
-            </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
-</form>
-
-
-        </div>
-    </div>
-</div>
-
-
-
-
-            <div style="height: 80vh;" class="card">
-                <div class="containermap">
-                    <div id="map"></div>
+        <div class="col-xl-12 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <form method="GET" action="{{ route('filter.tahun') }}">
+                        <div class="form-group">
+                            <label for="year">Pilih Tahun:</label>
+                            <div class="d-flex align-items-center">
+                                <select name="year" id="year" class="form-control mr-2" style="width: 200px;">
+                                    @for ($i = 2024; $i <= 2025; $i++)
+                                        <option value="{{ $i }}" {{ $i == request('year', date('Y')) ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+
+        <div style="height: 80vh;" class="card">
+            <div class="containermap">
+                <div id="map"></div>
             </div>
         </div>
     </div>
 </div>
-
 
 @endsection
 
@@ -106,14 +99,14 @@
     // Menambahkan marker dengan ikon custom dari data
     @foreach($data as $item)
         var customIcon = L.icon({
-            iconUrl: '{{ $item->gambar }}', // Mengambil path gambar dari database
+            iconUrl: '{{ $item['icon'] }}', // Mengambil path gambar dari data
             iconSize: [32, 32],
             iconAnchor: [16, 32]
         });
 
-        var marker = L.marker([{{ $item->latitude }}, {{ $item->longitude }}], {icon: customIcon}).addTo(map);
+        var marker = L.marker([{{ $item['latitude'] }}, {{ $item['longitude'] }}], {icon: customIcon}).addTo(map);
 
-        marker.bindPopup("<strong>{{ $item->nama_tanamanpangan }}</strong><br>{{ $item->deskripsi }}<br><small>{{ $item->tanggal ? $item->tanggal : 'Tanggal tidak tersedia' }}</small>");
+        marker.bindPopup("<strong>{{ $item['nama_provinsi'] }}</strong><br><strong>{{ $item['recommended_crop'] }}</strong><br>{{ $item['deskripsi'] }}");
     @endforeach
 </script>
 @endsection

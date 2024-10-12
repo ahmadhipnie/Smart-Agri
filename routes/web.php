@@ -33,8 +33,7 @@ Route::post('/cuaca/fetch', [PrediksiCuacaController::class, 'fetch'])->name('cu
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
     Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
     Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerah.rawan.pangan');
-    Route::get('/daerah-rawan-pangan/filter-tahun', [DaerahRawanPanganController::class, 'filter'])->name('filter.tahun');
-
+    Route::get('/filter-tahun', [DaerahRawanPanganController::class, 'index'])->name('filter.tahun');
     });
 
 Route::get('/peta-rekomendasi', [PetaRekomendasiController::class, 'index'])->name('peta');
