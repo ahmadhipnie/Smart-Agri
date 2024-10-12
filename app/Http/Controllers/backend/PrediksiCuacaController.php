@@ -1,234 +1,86 @@
 <?php
-
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class PrediksiCuacaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $provinces = $this->getProvincesAndCities();
+        // Daftar provinsi yang tersedia
+        $provinceData = [
+            'ACEH', 'BALI', 'BANGKA BELITUNG', 'BANTEN', 'BENGKULU', 'GORONTALO', 'JAKARTA', 'JAMBI',
+            'JAWA BARAT', 'JAWA TENGAH', 'JAWA TIMUR', 'KALIMANTAN BARAT', 'KALIMANTAN SELATAN',
+            'KALIMANTAN TENGAH', 'KALIMANTAN TIMUR', 'KALIMANTAN UTARA', 'KEPULAUAN RIAU', 'LAMPUNG',
+            'MALUKU', 'MALUKU UTARA', 'NUSA TENGGARA BARAT', 'NUSA TENGGARA TIMUR', 'PAPUA', 'PAPUA BARAT',
+            'PAPUA BARAT DAYA', 'PAPUA PEGUNUNGAN', 'PAPUA SELATAN', 'PAPUA TENGAH', 'RIAU', 'SULAWESI BARAT',
+            'SULAWESI SELATAN', 'SULAWESI TENGAH', 'SULAWESI TENGGARA', 'SULAWESI UTARA', 'SUMATERA BARAT',
+            'SUMATERA SELATAN', 'SUMATERA UTARA', 'YOGYAKARTA'
+        ];
 
-        return view('backend.cuaca.index', compact('provinces'));
+        // Tahun yang tersedia
+        $yearData = [2024, 2025];
+
+        // Ambil input dari form, dengan default untuk pertama kali halaman dibuka
+        $provinceSelect = $request->input('provinsiSelect', 'JAWA TIMUR');
+        $tanggal = $request->input('tanggalSelect', 1);
+        $bulan = $request->input('bulanSelect', 1);
+        $year = $request->input('tahunSelect', 2024);
+
+        // Menyiapkan array untuk menampung data cuaca
+        $weatherData = [];
+
+        // Loop melalui setiap bulan untuk mendapatkan data cuaca
+        for ($month = 1; $month <= 12; $month++) {
+            // Request ke API untuk mengambil data prediksi cuaca
+            $response = Http::retry(3, 1000)->timeout(60)->get("http://103.210.69.119:5000/predictions", [
+                'name' => $provinceSelect,
+                'tanggal' => $tanggal,
+                'bulan' => $month,
+                'tahun' => $year,
+            ]);
+
+            // Jika API merespon dengan sukses, masukkan data ke dalam array
+            if ($response->successful() && !empty($response->json()) && isset($response->json()[0])) {
+                $data = $response->json()[0];
+                $weatherData[$month] = [
+                    'temp' => number_format($data['temp'] ?? null, 1), // Membulatkan suhu ke 1 desimal
+                    'cloudcover' => number_format($data['cloudcover'] ?? null, 1), // Membulatkan tutup awan ke 1 desimal
+                    'humidity' => number_format($data['humidity'] ?? null, 1), // Membulatkan kelembapan ke 1 desimal
+                    'precip' => number_format($data['precip'] ?? null, 1), // Membulatkan presipitasi ke 1 desimal
+                    'windspeed' => number_format($data['windspeed'] ?? null, 1), // Membulatkan kecepatan angin ke 1 desimal
+                    'sealevelpressure' => number_format($data['sealevelpressure'] ?? null, 1), // Membulatkan tekanan udara ke 1 desimal
+                ];
+            } else {
+                // Jika data tidak tersedia, isi dengan null
+                $weatherData[$month] = [
+                    'temp' => null,
+                    'cloudcover' => null,
+                    'humidity' => null,
+                    'precip' => null,
+                    'windspeed' => null,
+                    'sealevelpressure' => null,
+                ];
+            }
+        }
+
+        // Mengembalikan data ke view
+        return view('backend.cuaca.index', compact(
+            'weatherData', 'year', 'provinceSelect', 'provinceData', 'yearData', 'tanggal', 'bulan'
+        ));
     }
 
-
-    public function fetchWeatherData(Request $request)
+    // Fungsi untuk menangani POST request dan redirect ke index
+    public function fetch(Request $request)
     {
-        $provinsi = $request->input('provinsi');
-        $kabupaten = $request->input('kabupaten');
-        $bulan = str_pad($request->input('bulan'), 2, '0', STR_PAD_LEFT);
-        $tahun = $request->input('tahun');
-
-        $startDate = "$tahun-$bulan-01";
-        $endDate = "$tahun-$bulan-" . cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun);
-
-        $apiKey = '293N98Y9M2J6Y6XPLLERL8XQ2'; //ganti api key yang baru dari buat akun(biar bisa)
-        $url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/$kabupaten/$startDate/$endDate?unitGroup=metric&key=$apiKey&contentType=json";
-
-        $response = Http::get($url);
-
-        Log::info('Request URL: ' . $url);
-        Log::info('Response Status: ' . $response->status());
-        Log::info('Response Body: ' . $response->body());
-
-        $weatherData = $response->json();
-
-        $cityName = $weatherData['address'] ?? 'Kota tidak diketahui';
-
-        $provinces = $this->getProvincesAndCities();
-
-        return view('backend.cuaca.index', compact('weatherData', 'cityName', 'provinces'));
+        // Redirect ke index dengan input yang dipilih
+        return redirect()->route('cuaca.index', [
+            'provinsiSelect' => $request->input('provinsiSelect'),
+            'tanggalSelect' => $request->input('tanggalSelect'),
+            'bulanSelect' => $request->input('bulanSelect'),
+            'tahunSelect' => $request->input('tahunSelect'),
+        ]);
     }
-
-
-    public function getProvincesAndCities()
-{
-    $data = [
-        'Aceh' => [
-            'Banda Aceh',
-            'Sabang',
-            'Lhokseumawe',
-            'Langsa',
-            'Sigli',
-            'Bireuen',
-        ],
-        'Sumatera Utara' => [
-            'Medan',
-            'Binjai',
-            'Pematangsiantar',
-            'Sibolga',
-            'Tebing Tinggi',
-            'Kisaran',
-        ],
-        'Sumatera Barat' => [
-            'Padang',
-            'Solok',
-            'Bukittinggi',
-            'Payakumbuh',
-            'Pariaman',
-        ],
-        'Riau' => [
-            'Pekanbaru',
-            'Dumai',
-            'Bengkalis',
-            'Siak',
-            'Pangkalan Kerinci',
-        ],
-        'Jambi' => [
-            'Jambi',
-            'Sungai Penuh',
-            'Muaro Jambi',
-        ],
-        'Sumatera Selatan' => [
-            'Palembang',
-            'Prabumulih',
-            'Lubuklinggau',
-            'Baturaja',
-        ],
-        'Bengkulu' => [
-            'Bengkulu',
-            'Rejang Lebong',
-            'Seluma',
-        ],
-        'Lampung' => [
-            'Bandar Lampung',
-            'Metro',
-            'Pringsewu',
-        ],
-        'DKI Jakarta' => [
-            'Jakarta Pusat',
-            'Jakarta Utara',
-            'Jakarta Barat',
-            'Jakarta Selatan',
-            'Jakarta Timur',
-        ],
-        'Jawa Barat' => [
-            'Bandung',
-            'Bogor',
-            'Bekasi',
-            'Cirebon',
-            'Depok',
-            'Tasikmalaya',
-            'Sumedang',
-            'Sukabumi',
-        ],
-        'Jawa Tengah' => [
-            'Semarang',
-            'Solo',
-            'Magelang',
-            'Tegal',
-            'Salatiga',
-            'Pekalongan',
-        ],
-        'DI Yogyakarta' => [
-            'Yogyakarta',
-            'Bantul',
-            'Sleman',
-            'Gunungkidul',
-            'Kulon Progo',
-        ],
-        'Jawa Timur' => [
-            'Surabaya',
-            'Malang',
-            'Kediri',
-            'Banyuwangi',
-            'Jember',
-            'Bondowoso',
-            'Sidoarjo',
-        ],
-        'Bali' => [
-            'Denpasar',
-            'Badung',
-            'Gianyar',
-            'Karangasem',
-            'Buleleng',
-        ],
-        'Nusa Tenggara Barat' => [
-            'Mataram',
-            'Bima',
-            'Sumbawa Besar',
-        ],
-        'Nusa Tenggara Timur' => [
-            'Kupang',
-            'Ruteng',
-            'Maumere',
-        ],
-        'Kalimantan Barat' => [
-            'Pontianak',
-            'Singkawang',
-            'Sambas',
-        ],
-        'Kalimantan Tengah' => [
-            'Palangka Raya',
-            'Sampit',
-            'Pangkalan Bun',
-        ],
-        'Kalimantan Selatan' => [
-            'Banjarmasin',
-            'Banjarbaru',
-            'Martapura',
-        ],
-        'Kalimantan Timur' => [
-            'Samarinda',
-            'Balikpapan',
-            'Bontang',
-        ],
-        'Kalimantan Utara' => [
-            'Tarakan',
-            'Nunukan',
-            'Malinau',
-        ],
-        'Sulawesi Utara' => [
-            'Manado',
-            'Bitung',
-            'Tomohon',
-        ],
-        'Sulawesi Tengah' => [
-            'Palu',
-            'Donggala',
-            'Poso',
-        ],
-        'Sulawesi Selatan' => [
-            'Makassar',
-            'Parepare',
-            'Palopo',
-        ],
-        'Sulawesi Tenggara' => [
-            'Kendari',
-            'Baubau',
-            'Buton',
-        ],
-        'Gorontalo' => [
-            'Gorontalo',
-            'Boalemo',
-            'Pohuwato',
-        ],
-        'Maluku' => [
-            'Ambon',
-            'Tual',
-        ],
-        'Maluku Utara' => [
-            'Ternate',
-            'Tidore',
-        ],
-        'Papua Barat' => [
-            'Manokwari',
-            'Sorong',
-            'Kaimana',
-        ],
-        'Papua' => [
-            'Jayapura',
-            'Merauke',
-            'Sorong',
-        ],
-    ];
-
-    return $data;
-
-}
 }
