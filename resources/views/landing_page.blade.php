@@ -184,7 +184,7 @@
         <h1 align = "left" >Sistem Prediksi Kecocokan <br>Komoditas Tanaman <span style="color: #ffc107;">Pangan</span> </h1>
         <h1 align = "left" >Berdasarkan Musim</h1>
         <p align = "left" >Sistem Prediksi Kecocokan Komoditas Tanaman Pangan membantu petani memilih tanaman yang optimal berdasarkan kondisi musim dan lokasi geografis untuk meningkatkan hasil dan efisiensi pertanian.</p>
-        <a href="{{ route('dashboard') }}" class="btn-cta" >Jelajahi Lebih Lanjut</a>
+        <a href="{{ route('dashboard.index') }}" class="btn-cta" >Jelajahi Lebih Lanjut</a>
     </div>
 </section>
 
