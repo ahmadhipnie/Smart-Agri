@@ -13,15 +13,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <!-- Form untuk memilih provinsi, tanggal, bulan, dan tahun -->
-                            <form action="{{ route('cuaca.fetch') }}" method="POST" class="d-flex justify-content-between w-100 flex-wrap">
+                            <form action="{{ route('cuaca.index') }}" method="GET" class="d-flex justify-content-between w-100 flex-wrap">
                                 @csrf
                                 <div class="form-group mr-3">
-                                    <label for="provinsiSelect">Nama Provinsi</label>
-                                    <select name="provinsiSelect" class="form-control" id="provinsiSelect">
+                                    <label for="prov">Nama Provinsi</label>
+                                    <select name="prov" class="form-control select" id="prov">
                                         <option value="">Pilih Provinsi</option>
                                         @foreach($provinceData as $province)
-                                            <option value="{{ $province }}" {{ $province === $provinceSelect ? 'selected' : '' }}>
+                                            <option value="{{ $province }}" {{ $province === $prov ? 'selected' : '' }}>
                                                 {{ $province }}
                                             </option>
                                         @endforeach
@@ -29,61 +28,37 @@
                                 </div>
 
                                 <div class="form-group mr-3">
-                                    <label for="tanggalSelect">Tanggal</label>
-                                    <input type="number" name="tanggalSelect" class="form-control" id="tanggalSelect" min="1" max="31" value="{{ $tanggal }}">
+                                    <label for="date">Tanggal</label>
+                                    <input type="number" name="date" style="width: auto" class="form-control select" id="date" min="1" max="31" value="{{ $date }}">
                                 </div>
 
                                 <div class="form-group mr-3">
-                                    <label for="bulanSelect">Bulan</label>
-                                    <select name="bulanSelect" class="form-control" id="bulanSelect">
-    @php
-        $bulanNames = [
-            1 => 'Januari',
-            2 => 'Februari',
-            3 => 'Maret',
-            4 => 'April',
-            5 => 'Mei',
-            6 => 'Juni',
-            7 => 'Juli',
-            8 => 'Agustus',
-            9 => 'September',
-            10 => 'Oktober',
-            11 => 'November',
-            12 => 'Desember',
-        ];
-    @endphp
-    @foreach($bulanNames as $i => $name)
-        <option value="{{ $i }}" {{ $i == $bulan ? 'selected' : '' }}>{{ $name }}</option>
-    @endforeach
-</select>
-
+                                    <label for="month">Bulan</label>
+                                    <select name="month" class="form-control select" id="month">
+                                        @foreach($months as $i => $month)
+                                            <option value="{{ $i + 1 }}" {{ ($i + 1) == $bulan ? 'selected' : '' }}>{{ $month }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-group mr-3">
-                                    <label for="tahunSelect">Tahun</label>
-                                    <select name="tahunSelect" class="form-control" id="tahunSelect">
+                                    <label for="year">Tahun</label>
+                                    <select name="year" class="form-control select" id="year">
                                         @foreach($yearData as $yearOption)
                                             <option value="{{ $yearOption }}" {{ $yearOption == $year ? 'selected' : '' }}>{{ $yearOption }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary align-self-end" style="background-color: #96a78d;">
-                                    Dapatkan Data
-                                </button>
                             </form>
                         </div>
 
                         <!-- Menampilkan informasi mengenai kota, tanggal, bulan, dan tahun yang dipilih -->
                         <div class="mt-4 text-center">
-                            <h4>Data Prediksi Cuaca untuk Provinsi {{ $provinceSelect }}, Tanggal {{ $tanggal }}, Bulan {{ $bulan }}, Tahun {{ $year }}</h4>
+                            <h4>Data Prediksi Cuaca untuk Provinsi {{ $prov }}, Tanggal {{ $date }}, Bulan {{ $bulan }}, Tahun {{ $year }}</h4>
                         </div>
-
                         @if(isset($weatherData[$bulan]) && !is_null($weatherData[$bulan]['temp']))
                             <div class="row mt-4">
                                 <!-- Menampilkan informasi untuk bulan yang dipilih -->
-                            
-
                                 <!-- Data cuaca: Suhu -->
                                 <div class="col-xl-4 col-lg-4 col-sm-6 mb-3">
                                     <div class="widget-stat card bg-primary">
@@ -196,4 +171,22 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $('.select').change(function() {
+            const urlLocation = document.location.href.split('?')[0];
+            const urlParam = new URLSearchParams(window.location.search);
+            urlParam.set(this.id, this.value);
+
+            $('.select').each(function() {
+                if (this.value) {
+                    urlParam.set(this.id, this.value);
+                }
+            });
+            document.location.href = `${urlLocation}?${urlParam.toString()}`;
+        
+        });
+    </script>
 @endsection
