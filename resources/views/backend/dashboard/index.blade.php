@@ -26,7 +26,7 @@
                                     <label for="provinsiSelect">Nama Provinsi</label>
                                     <select class="form-control" id="provinsiSelect" name="provinsiSelect">
                                         @foreach ($provinceData as $prov)
-                                            <option value="{{ $prov }}" {{ request('provinsiSelect') == $prov ? 'selected' : '' }}>{{ $prov }}</option>
+                                            <option value="{{ $prov }}" {{ $province == $prov ? 'selected' : '' }}>{{ $prov }}</option>
                                         @endforeach
                                     </select>
                                 </div>
