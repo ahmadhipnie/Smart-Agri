@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <form action="{{ route('dashboard.index') }}" method="GET" class="d-flex w-100 flex-wrap">
+                            <form action="{{ route('dashboard.index') }}" id="dashboardForm" method="GET" class="d-flex w-100 flex-wrap">
                                 <div class="form-group mr-3">
                                     <label for="tahunSelect">Tahun</label>
                                     <select class="form-control" id="tahunSelect" name="tahunSelect">
@@ -49,11 +49,17 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-header">
-                            <h4>Prediksi Cuaca untuk {{ $province }} di Tahun {{ $year }}</h4>
+                        <div id="gif" class="text-center d-none">
+                            <img src="{{ asset('backend/gif/preloader.gif')}}" alt="Loading..." />
+                            <p>Memuat data prediksi cuaca...</p>
                         </div>
-                        <div class="card-body">
-                            <div id="chart"></div>
+                        <div class="chartInfo">
+                            <div class="card-header info">
+                                <h4>Prediksi Cuaca untuk {{ $province }} di Tahun {{ $year }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,76 +69,4 @@
 </div>
 @endsection
 
-@section('script')
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script>
-var options = {
-    chart: {
-        type: 'line',
-        height: 350,
-        zoom: {
-            enabled: false
-        }
-    },
-    series: [
-        {
-            name: 'Suhu (°C)',
-            data: @json($temperatureData)
-        },
-        {
-            name: 'Cloudcover (%)',
-            data: @json($cloudcoverData)
-        },
-        {
-            name: 'Kelembaban (%)',
-            data: @json($humidityData)
-        },
-        {
-            name: 'Precipitation (mm)',
-            data: @json($precipData)
-        },
-        {
-            name: 'Kecepatan Angin (km/h)',
-            data: @json($windspeedData)
-        }
-    ],
-    xaxis: {
-        categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-        labels: {
-            style: {
-                fontSize: '12px'
-            }
-        }
-    },
-    yaxis: {
-        labels: {
-            formatter: function (val) {
-                return val.toFixed(1); // Format labels to 1 decimal place
-            }
-        }
-    },
-    tooltip: {
-        x: {
-            formatter: function (val, opts) {
-                let bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-                let dataIndex = opts.dataPointIndex;
-                let tanggal = {{ request('tanggalSelect', 1) }};
-                return `${tanggal} ${bulan[dataIndex]} {{ $year }}`;
-            }
-        },
-        y: {
-            formatter: function (val) {
-                return `${val.toFixed(1)}`;
-            }
-        }
-    },
-    dataLabels: {
-        enabled: false // Disable data labels (the blue boxes)
-    }
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
-</script>
-
-@endsection
+@include('script.dashboard')

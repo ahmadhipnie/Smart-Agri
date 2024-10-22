@@ -22,56 +22,77 @@ class DashboardController extends Controller
         ];
         $yearData = [2024, 2025];
 
-        // Default values if none are selected in the dropdown
         $year = $request->input('tahunSelect', 2024);
         $province = $request->input('provinsiSelect', 'JAWA TIMUR');
-        $tanggal = $request->input('tanggalSelect', 1); // Default to 1st day of the month
+        $tanggal = $request->input('tanggalSelect', 1); 
 
-        // Prepare arrays to hold data
+        $data = $this->getData($request);
+        $temperatureData = $data['temperatureData'];
+        $cloudcoverData = $data['cloudcoverData'];
+        $humidityData = $data['humidityData'];
+        $precipData = $data['precipData'];
+        $windspeedData = $data['windspeedData'];
+
+        return view('backend.dashboard.index', compact(
+            'data',
+            'year',
+            'province',
+            'provinceData',
+            'yearData', 
+            'tanggal' 
+        ));
+    }
+
+    public function fetch(Request $request){
+        $data = $this->getData($request);
+
+        $main = [];
+        $main['province'] = $request->input('provinsiSelect', 'JAWA TIMUR');
+        $main['year'] = $request->input('tahunSelect', 2024);
+
+        return response()->json(['data' => $data, 'main' => $main], 200);
+    }
+
+    public function getData(Request $request){
+
+        $year = $request->input('tahunSelect', 2024);
+        $province = $request->input('provinsiSelect', 'JAWA TIMUR');
+        $tanggal = $request->input('tanggalSelect', 1); 
+
         $temperatureData = [];
         $cloudcoverData = [];
         $humidityData = [];
         $precipData = [];
         $windspeedData = [];
 
-        // Loop through each month and get data for the selected day of each month
         for ($month = 1; $month <= 12; $month++) {
-            // API request with retry and timeout handling
-            $response = Http::retry(3, 1000)->timeout(60)->get("http://103.210.69.119:5000/predictions", [
-                'name' => $province,
-                'tanggal' => $tanggal, // Fetching data for selected day
-                'bulan' => $month,
-                'tahun' => $year,
-            ]);
+            try {
+                $response = Http::retry(3, 1000)->timeout(60)->get("http://103.210.69.119:5000/predictions", [
+                    'name' => $province,
+                    'tanggal' => $tanggal,
+                    'bulan' => $month,
+                    'tahun' => $year,
+                ]);
 
-            // Check if the API call was successful and data is present
-            if ($response->successful() && !empty($response->json()) && isset($response->json()[0])) {
                 $data = $response->json()[0];
 
-                // Push data for each category
                 $temperatureData[] = $data['temp'] ?? null;
                 $cloudcoverData[] = $data['cloudcover'] ?? null;
                 $humidityData[] = $data['humidity'] ?? null;
                 $precipData[] = $data['precip'] ?? null;
                 $windspeedData[] = $data['windspeed'] ?? null;
-            } else {
-                // Handle missing data
+            } catch (\Exception $e){
+
                 $temperatureData[] = $cloudcoverData[] = $humidityData[] = $precipData[] = $windspeedData[] = null;
             }
         }
 
-        // Pass all data to the view
-        return view('backend.dashboard.index', compact(
-            'temperatureData',
-            'cloudcoverData',
-            'humidityData',
-            'precipData',
-            'windspeedData',
-            'year',
-            'province',
-            'provinceData', // Pass province data to Blade
-            'yearData', // Pass year data to Blade
-            'tanggal' // Pass selected date to Blade
-        ));
+        $data = [];
+        $data['temperatureData'] = $temperatureData;
+        $data['cloudcoverData'] = $cloudcoverData;
+        $data['humidityData'] = $humidityData;
+        $data['precipData'] = $precipData;
+        $data['windspeedData'] = $windspeedData;
+        return $data;
     }
 }

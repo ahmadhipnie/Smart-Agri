@@ -26,10 +26,11 @@ Route::get('/', function () {
 Route::prefix('detail')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-  Route::get('/cuaca', [PrediksiCuacaController::class, 'index'])->name('cuaca.index');
+    Route::get('/cuaca', [PrediksiCuacaController::class, 'index'])->name('cuaca.index');
 
-// Route untuk form POST request
-Route::get('/cuaca/fetch', [PrediksiCuacaController::class, 'fetch'])->name('cuaca.fetch');
+    // Route untuk form POST request
+    Route::get('/cuaca/fetch', [PrediksiCuacaController::class, 'fetch'])->name('cuaca.fetch');
+    Route::get('/dashboard/fetch', [DashboardController::class, 'fetch'])->name('dashboard.fetch');
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
     Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
     Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerah.rawan.pangan');
