@@ -43,7 +43,6 @@
                                         <option value="{{ $i }}" {{ $i == request('year', date('Y')) ? 'selected' : '' }}>{{ $i }}</option>
                                     @endfor
                                 </select>
-                                <button type="submit" class="btn btn-primary">Filter</button>
                             </div>
                         </div>
                     </form>
@@ -52,7 +51,11 @@
         </div>
 
         <div style="height: 80vh;" class="card">
-            <div class="containermap">
+            <div id="gif" class="text-center d-none">
+                <img src="{{ asset('backend/gif/preloader.gif')}}" alt="Loading..." />
+                <p>Memuat data prediksi Daerah Rawan Pangan...</p>
+            </div>
+            <div class="containermap mapInfo">
                 <div id="map"></div>
             </div>
         </div>
@@ -61,52 +64,4 @@
 
 @endsection
 
-@section('script')
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    var map = L.map('map', {
-        center: [-0.7893, 113.9213], // Titik pusat Indonesia
-        zoom: 5,
-        maxZoom: 10,
-        minZoom: 4,
-        zoomControl: true
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var bounds = L.latLngBounds(
-        L.latLng(-11.0, 95.0), 
-        L.latLng(6.0, 141.0) 
-    );
-    map.setMaxBounds(bounds);
-    
-    map.on('drag', function() {
-        map.panInsideBounds(bounds, {animate: false});
-    });
-
-    map.on('zoomend', function() {
-        if (map.getZoom() > 10) {
-            map.setZoom(10);
-        }
-        if (map.getZoom() < 4) {
-            map.setZoom(4);
-        }
-    });
-
-    // Menambahkan marker dengan ikon custom dari data
-    @foreach($data as $item)
-        var customIcon = L.icon({
-            iconUrl: '{{ $item['icon'] }}', // Mengambil path gambar dari data
-            iconSize: [32, 32],
-            iconAnchor: [16, 32]
-        });
-
-        var marker = L.marker([{{ $item['latitude'] }}, {{ $item['longitude'] }}], {icon: customIcon}).addTo(map);
-
-        marker.bindPopup("<strong>{{ $item['nama_provinsi'] }}</strong><br><strong>{{ $item['recommended_crop'] }}</strong><br>{{ $item['deskripsi'] }}");
-    @endforeach
-</script>
-@endsection
+@include('script.daerahRawanPangan')

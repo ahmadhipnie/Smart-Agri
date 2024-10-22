@@ -14,17 +14,17 @@ class DaerahRawanPanganController extends Controller
         'BANGKA BELITUNG' => ['latitude' => -2.7363, 'longitude' => 106.2247], // Provinsi di Sumatra
         'BANTEN' => ['latitude' => -6.3748, 'longitude' => 106.6002], // Provinsi di Pulau Jawa
         'BENGKULU' => ['latitude' => -3.8004, 'longitude' => 102.2652], // Provinsi di Sumatra
-        'JAKARTA' => ['latitude' => -6.2088, 'longitude' => 106.8456], // Provinsi di Pulau Jawa
-        'JAMBI' => ['latitude' => -1.6014, 'longitude' => 103.6100], // Provinsi di Sumatra
-        'JAWA BARAT' => ['latitude' => -7.1966, 'longitude' => 107.9347], // Provinsi di Pulau Jawa
-        'JAWA TENGAH' => ['latitude' => -7.3294, 'longitude' => 110.3491], // Provinsi di Pulau Jawa
-        'JAWA TIMUR' => ['latitude' => -7.9824, 'longitude' => 112.6165], // Provinsi di Pulau Jawa
-        'LAMPUNG' => ['latitude' => -5.3604, 'longitude' => 105.2704], // Provinsi di Sumatra
-        'RIAU' => ['latitude' => 0.4644, 'longitude' => 101.4470], // Provinsi di Sumatra
-        'SUMATERA BARAT' => ['latitude' => -0.5202, 'longitude' => 100.3680], // Provinsi di Sumatra
-        'SUMATERA SELATAN' => ['latitude' => -3.0322, 'longitude' => 104.7539], // Provinsi di Sumatra
-        'SUMATERA UTARA' => ['latitude' => 2.0718, 'longitude' => 99.5683], // Provinsi di Sumatra
-        'YOGYAKARTA' => ['latitude' => -7.7956, 'longitude' => 110.3688], // Provinsi di Pulau Jawa
+        // 'JAKARTA' => ['latitude' => -6.2088, 'longitude' => 106.8456], // Provinsi di Pulau Jawa
+        // 'JAMBI' => ['latitude' => -1.6014, 'longitude' => 103.6100], // Provinsi di Sumatra
+        // 'JAWA BARAT' => ['latitude' => -7.1966, 'longitude' => 107.9347], // Provinsi di Pulau Jawa
+        // 'JAWA TENGAH' => ['latitude' => -7.3294, 'longitude' => 110.3491], // Provinsi di Pulau Jawa
+        // 'JAWA TIMUR' => ['latitude' => -7.9824, 'longitude' => 112.6165], // Provinsi di Pulau Jawa
+        // 'LAMPUNG' => ['latitude' => -5.3604, 'longitude' => 105.2704], // Provinsi di Sumatra
+        // 'RIAU' => ['latitude' => 0.4644, 'longitude' => 101.4470], // Provinsi di Sumatra
+        // 'SUMATERA BARAT' => ['latitude' => -0.5202, 'longitude' => 100.3680], // Provinsi di Sumatra
+        // 'SUMATERA SELATAN' => ['latitude' => -3.0322, 'longitude' => 104.7539], // Provinsi di Sumatra
+        // 'SUMATERA UTARA' => ['latitude' => 2.0718, 'longitude' => 99.5683], // Provinsi di Sumatra
+        // 'YOGYAKARTA' => ['latitude' => -7.7956, 'longitude' => 110.3688], // Provinsi di Pulau Jawa
 
 
         
@@ -57,6 +57,17 @@ class DaerahRawanPanganController extends Controller
 
     public function index(Request $request)
     {
+        $data = $this->getData($request);
+
+        return view('backend.daerahpangan.index', compact('data'));
+    }
+
+    public function fetch(Request $request){
+        $data = $this->getData($request);
+        return response()->json($data, 200);
+    }
+
+    public function getData(Request $request){
         $year = $request->input('year', date('Y'));
         $data = [];
 
@@ -69,7 +80,13 @@ class DaerahRawanPanganController extends Controller
 
             // Mengambil data untuk setiap tanggal dalam bulan
             for ($day = 1; $day <= $daysInMonth; $day++) {
-                $response = Http::get("http://103.210.69.119:5000/predictions?name={$province}&tanggal={$day}&bulan=7&tahun={$year}"); // Ganti bulan sesuai kebutuhan
+                // $response = Http::get("http://103.210.69.119:5000/predictions?name={$province}&tanggal={$day}&bulan=7&tahun={$year}"); // Ganti bulan sesuai kebutuhan
+                $response = Http::retry(3, 1000)->timeout(60)->get("http://103.210.69.119:5000/predictions", [
+                    'name' => $province,
+                    'tanggal' => $day,
+                    'bulan' => 7,
+                    'tahun' => $year,
+                ]);
                 $weatherData = $response->json();
 
                 if (!empty($weatherData)) {
@@ -99,8 +116,7 @@ class DaerahRawanPanganController extends Controller
                 ];
             }
         }
-
-        return view('backend.daerahpangan.index', compact('data'));
+        return $data;
     }
 
     private function getRecommendedCrop($avgHumidity, $province)
@@ -147,5 +163,6 @@ class DaerahRawanPanganController extends Controller
             'description' => 'Kondisi kelembapan tidak mendukung untuk penanaman.',
             'icon' => '',
         ];
+
     }
 }
