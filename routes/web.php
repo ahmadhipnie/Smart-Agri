@@ -29,7 +29,7 @@ Route::prefix('detail')->group(function () {
   Route::get('/cuaca', [PrediksiCuacaController::class, 'index'])->name('cuaca.index');
 
 // Route untuk form POST request
-Route::post('/cuaca/fetch', [PrediksiCuacaController::class, 'fetch'])->name('cuaca.fetch');
+Route::get('/cuaca/fetch', [PrediksiCuacaController::class, 'fetch'])->name('cuaca.fetch');
     Route::get('/jenis-tanaman-pangan', [JenisTanamanController::class, 'index'])->name('jenistanaman');
     Route::get('/hasil-uji-tanaman-pangan', [HasilUjiTanamanController::class, 'index'])->name('hasilujitanaman');
     Route::get('/daerah-rawan-pangan', [DaerahRawanPanganController::class, 'index'])->name('daerah.rawan.pangan');
