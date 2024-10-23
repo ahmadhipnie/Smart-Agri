@@ -18,7 +18,7 @@
                                     <label for="tahunSelect">Tahun</label>
                                     <select class="form-control" id="tahunSelect" name="tahunSelect">
                                         @foreach ($yearData as $yr)
-                                            <option value="{{ $yr }}" {{ request('tahunSelect') == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                            <option value="{{ $yr }}" {{ $main['year'] == $yr ? 'selected' : '' }}>{{ $yr }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -26,7 +26,7 @@
                                     <label for="provinsiSelect">Nama Provinsi</label>
                                     <select class="form-control" id="provinsiSelect" name="provinsiSelect">
                                         @foreach ($provinceData as $prov)
-                                            <option value="{{ $prov }}" {{ $province == $prov ? 'selected' : '' }}>{{ $prov }}</option>
+                                            <option value="{{ $prov }}" {{ $main['province'] == $prov ? 'selected' : '' }}>{{ $prov }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -34,7 +34,7 @@
                                     <label for="tanggalSelect">Tanggal</label>
                                     <select class="form-control" id="tanggalSelect" name="tanggalSelect">
                                         @for ($i = 1; $i <= 31; $i++)
-                                            <option value="{{ $i }}" {{ request('tanggalSelect') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                            <option value="{{ $i }}" {{ $main['tanggal'] == $i ? 'selected' : '' }}>{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="chartInfo">
                             <div class="card-header info">
-                                <h4>Prediksi Cuaca untuk {{ $province }} di Tahun {{ $year }}</h4>
+                                <h4>Prediksi Cuaca untuk {{ $main['province'] }} di Tahun {{ $main['year'] }}</h4>
                             </div>
                             <div class="card-body">
                                 <div id="chart"></div>

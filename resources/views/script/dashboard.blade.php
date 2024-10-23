@@ -54,7 +54,7 @@
                             let bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
                             let dataIndex = opts.dataPointIndex;
                             let tanggal = {{ request('tanggalSelect', 1) }};
-                            return `${tanggal} ${bulan[dataIndex]} {{ $year }}`;
+                            return `${tanggal} ${bulan[dataIndex]} {{ $main['year'] }}`;
                         }
                     },
                     y: {
