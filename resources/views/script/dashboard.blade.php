@@ -1,6 +1,11 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
+
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
         var chart;
         function renderChart(data) {
             var options = {

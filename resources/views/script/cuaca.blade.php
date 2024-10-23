@@ -1,5 +1,9 @@
 @section('script')
     <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+        
         $('#weatherForm').on('submit', function(e){
             e.preventDefault();
             preload();

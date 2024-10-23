@@ -94,6 +94,11 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('assets/js/sweetalert2.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('assets/js/sweetalert2.min.js')}}"></script>
+    <script>
+        window.addEventListener('load', function() {
+                document.body.classList.add('loaded');
+            });
+    </script>
 @endsection

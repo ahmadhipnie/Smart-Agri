@@ -136,6 +136,9 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
     var map = L.map('map', {
             center: [-0.7893, 113.9213],
             zoom: 5,    
