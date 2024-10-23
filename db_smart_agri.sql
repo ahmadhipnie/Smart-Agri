@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2024 at 05:25 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Oct 23, 2024 at 05:51 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,85 +33,85 @@ CREATE TABLE `prediksi_tanaman_pangan` (
   `thn_2021` decimal(10,0) NOT NULL,
   `thn_2022` decimal(10,0) NOT NULL,
   `thn_2023` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `prediksi_tanaman_pangan`
 --
 
 INSERT INTO `prediksi_tanaman_pangan` (`id_provinsi`, `id_tanamanpangan`, `thn_2021`, `thn_2022`, `thn_2023`) VALUES
-('PRP01', 'TP001', '6', '6', '6'),
-('PRP02', 'TP001', '5', '5', '5'),
-('PRP03', 'TP001', '5', '5', '5'),
-('PRP04', 'TP001', '4', '4', '4'),
-('PRP05', 'TP001', '5', '5', '5'),
-('PRP06', 'TP001', '6', '5', '5'),
-('PRP07', 'TP001', '5', '5', '5'),
-('PRP08', 'TP001', '5', '5', '5'),
-('PRP09', 'TP001', '4', '4', '4'),
-('PRP10', 'TP001', '3', '3', '3'),
-('PRP11', 'TP001', '5', '5', '6'),
-('PRP12', 'TP001', '6', '6', '6'),
-('PRP13', 'TP001', '6', '6', '6'),
-('PRP14', 'TP001', '5', '5', '5'),
-('PRP15', 'TP001', '6', '6', '6'),
-('PRP16', 'TP001', '5', '5', '5'),
-('PRP17', 'TP001', '6', '6', '6'),
-('PRP18', 'TP001', '5', '5', '5'),
-('PRP19', 'TP001', '4', '4', '4'),
-('PRP20', 'TP001', '3', '3', '3'),
-('PRP21', 'TP001', '3', '3', '3'),
-('PRP22', 'TP001', '4', '4', '4'),
-('PRP23', 'TP001', '4', '4', '4'),
-('PRP24', 'TP001', '4', '4', '3'),
-('PRP25', 'TP001', '4', '4', '4'),
-('PRP26', 'TP001', '5', '4', '5'),
-('PRP27', 'TP001', '5', '5', '5'),
-('PRP28', 'TP001', '4', '4', '4'),
-('PRP29', 'TP001', '5', '5', '5'),
-('PRP30', 'TP001', '5', '5', '5'),
-('PRP31', 'TP001', '4', '4', '4'),
-('PRP32', 'TP001', '3', '4', '4'),
-('PRP33', 'TP001', '5', '4', '4'),
-('PRP34', 'TP001', '4', '0', '0'),
-('PRP35', 'TP001', '4', '4', '4'),
-('PRP36', 'TP001', '4', '0', '0'),
-('PRP37', 'TP001', '4', '0', '0'),
-('PRP38', 'TP001', '4', '0', '0'),
-('PRP01', 'TP002', '6', '6', '6'),
-('PRP02', 'TP002', '6', '6', '6'),
-('PRP03', 'TP002', '6', '7', '7'),
-('PRP04', 'TP002', '3', '3', '3'),
-('PRP05', 'TP002', '6', '6', '17'),
-('PRP06', 'TP002', '6', '8', '6'),
-('PRP07', 'TP002', '6', '7', '6'),
-('PRP08', 'TP002', '7', '6', '7'),
-('PRP09', 'TP002', '0', '4', '4'),
-('PRP10', 'TP002', '5', '5', '5'),
-('PRP11', 'TP002', '0', '0', '0'),
-('PRP12', 'TP002', '7', '8', '7'),
-('PRP13', 'TP002', '6', '6', '6'),
-('PRP14', 'TP002', '5', '5', '5'),
-('PRP15', 'TP002', '6', '6', '6'),
-('PRP16', 'TP002', '7', '8', '7'),
-('PRP17', 'TP002', '4', '5', '5'),
-('PRP18', 'TP002', '7', '7', '6'),
-('PRP19', 'TP002', '3', '3', '3'),
-('PRP20', 'TP002', '4', '4', '0'),
-('PRP21', 'TP002', '0', '5', '5'),
-('PRP22', 'TP002', '6', '6', '6'),
-('PRP23', 'TP002', '6', '5', '6'),
-('PRP24', 'TP002', '5', '5', '5'),
-('PRP25', 'TP002', '3', '3', '4'),
-('PRP26', 'TP002', '4', '4', '4'),
-('PRP27', 'TP002', '6', '6', '6'),
-('PRP28', 'TP002', '4', '4', '4'),
-('PRP29', 'TP002', '5', '5', '5'),
-('PRP30', 'TP002', '5', '5', '5'),
-('PRP31', 'TP002', '0', '0', '0'),
-('PRP32', 'TP002', '5', '5', '5'),
-('PRP33', 'TP002', '4', '5', '4'),
-('PRP34', 'TP002', '5', '5', '5');
+('PRP01', 'TP001', 6, 6, 6),
+('PRP02', 'TP001', 5, 5, 5),
+('PRP03', 'TP001', 5, 5, 5),
+('PRP04', 'TP001', 4, 4, 4),
+('PRP05', 'TP001', 5, 5, 5),
+('PRP06', 'TP001', 6, 5, 5),
+('PRP07', 'TP001', 5, 5, 5),
+('PRP08', 'TP001', 5, 5, 5),
+('PRP09', 'TP001', 4, 4, 4),
+('PRP10', 'TP001', 3, 3, 3),
+('PRP11', 'TP001', 5, 5, 6),
+('PRP12', 'TP001', 6, 6, 6),
+('PRP13', 'TP001', 6, 6, 6),
+('PRP14', 'TP001', 5, 5, 5),
+('PRP15', 'TP001', 6, 6, 6),
+('PRP16', 'TP001', 5, 5, 5),
+('PRP17', 'TP001', 6, 6, 6),
+('PRP18', 'TP001', 5, 5, 5),
+('PRP19', 'TP001', 4, 4, 4),
+('PRP20', 'TP001', 3, 3, 3),
+('PRP21', 'TP001', 3, 3, 3),
+('PRP22', 'TP001', 4, 4, 4),
+('PRP23', 'TP001', 4, 4, 4),
+('PRP24', 'TP001', 4, 4, 3),
+('PRP25', 'TP001', 4, 4, 4),
+('PRP26', 'TP001', 5, 4, 5),
+('PRP27', 'TP001', 5, 5, 5),
+('PRP28', 'TP001', 4, 4, 4),
+('PRP29', 'TP001', 5, 5, 5),
+('PRP30', 'TP001', 5, 5, 5),
+('PRP31', 'TP001', 4, 4, 4),
+('PRP32', 'TP001', 3, 4, 4),
+('PRP33', 'TP001', 5, 4, 4),
+('PRP34', 'TP001', 4, 0, 0),
+('PRP35', 'TP001', 4, 4, 4),
+('PRP36', 'TP001', 4, 0, 0),
+('PRP37', 'TP001', 4, 0, 0),
+('PRP38', 'TP001', 4, 0, 0),
+('PRP01', 'TP002', 6, 6, 6),
+('PRP02', 'TP002', 6, 6, 6),
+('PRP03', 'TP002', 6, 7, 7),
+('PRP04', 'TP002', 3, 3, 3),
+('PRP05', 'TP002', 6, 6, 17),
+('PRP06', 'TP002', 6, 8, 6),
+('PRP07', 'TP002', 6, 7, 6),
+('PRP08', 'TP002', 7, 6, 7),
+('PRP09', 'TP002', 0, 4, 4),
+('PRP10', 'TP002', 5, 5, 5),
+('PRP11', 'TP002', 0, 0, 0),
+('PRP12', 'TP002', 7, 8, 7),
+('PRP13', 'TP002', 6, 6, 6),
+('PRP14', 'TP002', 5, 5, 5),
+('PRP15', 'TP002', 6, 6, 6),
+('PRP16', 'TP002', 7, 8, 7),
+('PRP17', 'TP002', 4, 5, 5),
+('PRP18', 'TP002', 7, 7, 6),
+('PRP19', 'TP002', 3, 3, 3),
+('PRP20', 'TP002', 4, 4, 0),
+('PRP21', 'TP002', 0, 5, 5),
+('PRP22', 'TP002', 6, 6, 6),
+('PRP23', 'TP002', 6, 5, 6),
+('PRP24', 'TP002', 5, 5, 5),
+('PRP25', 'TP002', 3, 3, 4),
+('PRP26', 'TP002', 4, 4, 4),
+('PRP27', 'TP002', 6, 6, 6),
+('PRP28', 'TP002', 4, 4, 4),
+('PRP29', 'TP002', 5, 5, 5),
+('PRP30', 'TP002', 5, 5, 5),
+('PRP31', 'TP002', 0, 0, 0),
+('PRP32', 'TP002', 5, 5, 5),
+('PRP33', 'TP002', 4, 5, 4),
+('PRP34', 'TP002', 5, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -124,7 +124,7 @@ CREATE TABLE `tb_daerahrawan` (
   `nama_daerah` varchar(100) NOT NULL,
   `latitude` varchar(50) NOT NULL,
   `longitude` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_daerahrawan`
@@ -241,7 +241,7 @@ INSERT INTO `tb_daerahrawan` (`id_daerah`, `nama_daerah`, `latitude`, `longitude
 CREATE TABLE `tb_jenisiklim` (
   `id_iklim` char(10) NOT NULL,
   `nama_iklim` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_jenisiklim`
@@ -254,15 +254,75 @@ INSERT INTO `tb_jenisiklim` (`id_iklim`, `nama_iklim`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_jenis_varietas`
+--
+
+CREATE TABLE `tb_jenis_varietas` (
+  `id_jenis_varietas` varchar(10) NOT NULL,
+  `nama_jenis_varietas` char(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_jenis_varietas`
+--
+
+INSERT INTO `tb_jenis_varietas` (`id_jenis_varietas`, `nama_jenis_varietas`) VALUES
+('VJ001', 'Jagung Quality Protein Maize'),
+('VJ002', 'Jagung Provit A Tinggi'),
+('VJ003', 'Jagung Pulut'),
+('VJ004', 'Jagung Antosianin Tinggi'),
+('VP001', 'Padi Hibrida'),
+('VP002', 'Padi Unggul'),
+('VP003', 'Padi Lokal');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_kelebihan_kekurangan`
 --
 
 CREATE TABLE `tb_kelebihan_kekurangan` (
   `id_tanamanpangan` varchar(10) NOT NULL,
   `id_varietas` varchar(10) NOT NULL,
-  `kelebihan` varchar(200) NOT NULL,
-  `kekurangan` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `kelebihan` varchar(500) NOT NULL,
+  `kekurangan` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_kelebihan_kekurangan`
+--
+
+INSERT INTO `tb_kelebihan_kekurangan` (`id_tanamanpangan`, `id_varietas`, `kelebihan`, `kekurangan`) VALUES
+('TP001', 'VP001', 'potensi hasil panen yang maksimal', 'kualitas hasilnya akan berkurang jauh apabila berasal dari tanaman turunannya.'),
+('TP001', 'VP001', 'Hasil panen dapat mencapai dua kali lipat dari padi lokal.', 'Harga benih varietas hibrida ini termasuk yang termahal.'),
+('TP001', 'VP001', 'Butiran padi yang dihasilkan lebih bagus', 'padi yang hanya sekali tanam'),
+('TP001', 'VP001', 'kualitas nasi yang lebih pulen dan wangi.', ''),
+('TP001', 'VP002', 'Varietas ini dapat ditanam berkali-kali dengan kualitas yang sama', 'Harga benih lebih mahal: Benih varietas padi unggul umumnya lebih mahal dibandingkan benih varietas lokal.'),
+('TP001', 'VP002', 'Harga benih padi unggul pun tidak semahal benih padi hibrida', 'Membutuhkan perawatan lebih intensif: Beberapa varietas padi unggul membutuhkan perawatan yang lebih intensif, seperti pemupukan dan pengendalian hama penyakit yang lebih teratur.'),
+('TP001', 'VP002', 'ketahanannya terhadap hama wereng cokelat.', 'Berpotensi mengurangi keanekaragaman genetik: Penggunaan varietas padi unggul secara luas dapat mengurangi keanekaragaman genetik padi, yang dapat berdampak negatif pada ketahanan pangan jangka panjang.'),
+('TP001', 'VP002', '', 'Tergantung pada input eksternal: Varietas padi unggul seringkali membutuhkan input eksternal seperti pupuk dan pestisida, yang dapat meningkatkan biaya produksi dan berdampak negatif pada lingkungan.'),
+('TP001', 'VP002', '', 'Tidak selalu cocok untuk semua kondisi lingkungan: Meskipun beberapa varietas padi unggul memiliki toleransi terhadap kondisi lingkungan tertentu, tidak semua varietas cocok untuk semua kondisi lingkungan.'),
+('TP001', 'VP003', 'Rasa dan aroma khas', 'Produktivitas relatif rendah'),
+('TP001', 'VP003', 'Adaptasi tinggi terhadap lingkungan lokal', 'Umur panen relatif panjang'),
+('TP001', 'VP003', 'Keanekaragaman genetik', 'Kerentanan terhadap hama dan penyakit tertentu'),
+('TP001', 'VP003', 'Nilai budaya dan sosial', 'Ketersediaan benih terbatas'),
+('TP001', 'VP003', 'Harga jual relatif tinggi', 'Perawatan lebih intensif'),
+('TP002', 'VJ001', 'Lebih bergizi (tinggi protein)', 'Rentan hama dan penyakit'),
+('TP002', 'VJ001', 'Baik untuk mengatasi kekurangan gizi', 'Tekstur lunak, mudah diserang hama pascapanen'),
+('TP002', 'VJ001', 'Serbaguna, bisa diolah jadi macam-macam', 'Benih susah didapat'),
+('TP002', 'VJ001', 'Potensi hasil panen tinggi', 'Harga benih mahal'),
+('TP002', 'VJ002', 'Kandungan beta karoten tinggi: Penting untuk penglihatan, sistem kekebalan tubuh, dan pertumbuhan.', 'Rasa dan tekstur: Mungkin sedikit berbeda dari jagung biasa.'),
+('TP002', 'VJ002', 'Potensi hasil baik: Mencapai 7,4 - 8,8 ton/ha.', 'Ketersediaan: Belum tentu tersedia di semua daerah.'),
+('TP002', 'VJ002', 'Perlindungan tongkol baik: Kelobot menutup tongkol dengan baik, melindungi dari hama.', 'Harga: Bibit mungkin sedikit lebih mahal.'),
+('TP002', 'VJ002', 'Rendemen tinggi: Proporsi biji yang dapat dipanen besar.', ''),
+('TP002', 'VJ003', 'Rasa gurih dan tekstur pulen.', 'Produktivitas rendah.'),
+('TP002', 'VJ003', 'Bisa diolah jadi beragam makanan.', 'Rentan hama dan penyakit.'),
+('TP002', 'VJ003', 'Indeks glikemik lebih rendah.', 'Harga lebih mahal.'),
+('TP002', 'VJ003', 'Umur panen relatif pendek.', ''),
+('TP002', 'VJ004', 'Kaya antioksidan, baik untuk kesehatan.', 'Produktivitas mungkin lebih rendah.'),
+('TP002', 'VJ004', 'Berpotensi sebagai pangan fungsional bernilai jual tinggi.', 'Perawatan bisa lebih rumit.'),
+('TP002', 'VJ004', 'Alternatif pangan sehat.', 'Harga benih lebih mahal.'),
+('TP002', 'VJ004', '', 'Pengolahan perlu diperhatikan agar antosianin tidak rusak.');
 
 -- --------------------------------------------------------
 
@@ -278,7 +338,7 @@ CREATE TABLE `tb_keterangan` (
   `id_tanamanpangan` char(10) NOT NULL,
   `id_iklim` char(10) NOT NULL,
   `id_daerah` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_keterangan`
@@ -395,7 +455,7 @@ INSERT INTO `tb_keterangan` (`id_keterangan`, `deskripsi`, `tanggal`, `gambar`, 
 CREATE TABLE `tb_provinsi` (
   `id_provinsi` varchar(10) NOT NULL,
   `nama_provinsi` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_provinsi`
@@ -450,7 +510,7 @@ INSERT INTO `tb_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 CREATE TABLE `tb_tanamanpangan` (
   `id_tanamanpangan` char(10) NOT NULL,
   `nama_tanamanpangan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_tanamanpangan`
@@ -471,10 +531,105 @@ INSERT INTO `tb_tanamanpangan` (`id_tanamanpangan`, `nama_tanamanpangan`) VALUES
 --
 
 CREATE TABLE `tb_varietas` (
-  `id_varietas` varchar(10) NOT NULL,
+  `id_jenis_varietas` varchar(10) NOT NULL,
   `id_tanamanpangan` varchar(10) NOT NULL,
-  `nama_varietas` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `nama_varietas` char(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_varietas`
+--
+
+INSERT INTO `tb_varietas` (`id_jenis_varietas`, `id_tanamanpangan`, `nama_varietas`) VALUES
+('VP001', 'TP001', 'intani 1'),
+('VP001', 'TP001', 'intani 2'),
+('VP001', 'TP001', 'rokan'),
+('VP001', 'TP001', 'SL8'),
+('VP001', 'TP001', '11SHS'),
+('VP001', 'TP001', 'Segera Anak'),
+('VP001', 'TP001', 'PP1'),
+('VP001', 'TP001', 'H1'),
+('VP001', 'TP001', 'Bernas Prima'),
+('VP001', 'TP001', 'Sembada B3'),
+('VP001', 'TP001', 'Sembada B5'),
+('VP001', 'TP001', 'Sembada B8'),
+('VP001', 'TP001', 'Sembada B9'),
+('VP001', 'TP001', 'Long Ping'),
+('VP001', 'TP001', 'Adirasa-1'),
+('VP001', 'TP001', 'Adirasa-64'),
+('VP001', 'TP001', 'Hibrindo R-1'),
+('VP001', 'TP001', 'Hibrindo R-2'),
+('VP001', 'TP001', 'Manis-4'),
+('VP001', 'TP001', 'Manis-5'),
+('VP001', 'TP001', 'Hipa4'),
+('VP001', 'TP001', 'Hipa 5 Ceva'),
+('VP001', 'TP001', 'Hipa 7-10'),
+('VP001', 'TP001', 'MIKI 1-3'),
+('VP001', 'TP001', 'SL 8 SHS'),
+('VP001', 'TP001', 'SL 11 SHS'),
+('VP001', 'TP001', 'Maro'),
+('VP002', 'TP001', 'Inpara 1'),
+('VP002', 'TP001', 'Inpara 2'),
+('VP002', 'TP001', 'Inpara 3'),
+('VP002', 'TP001', 'Inpara 4'),
+('VP002', 'TP001', 'Inpara 5'),
+('VP002', 'TP001', 'Inpara 6'),
+('VP002', 'TP001', 'Inpara 7'),
+('VP002', 'TP001', 'Inpara 8'),
+('VP002', 'TP001', 'Inpago 1'),
+('VP002', 'TP001', 'Inpago 2'),
+('VP002', 'TP001', 'Inpago 3'),
+('VP002', 'TP001', 'Inpago 4'),
+('VP002', 'TP001', 'Inpago 5'),
+('VP002', 'TP001', 'Inpari 1'),
+('VP002', 'TP001', 'Inpari 2'),
+('VP002', 'TP001', 'Inpari 3'),
+('VP002', 'TP001', 'Inpari 4'),
+('VP002', 'TP001', 'Inpari 5'),
+('VP002', 'TP001', 'Inpari 6'),
+('VP002', 'TP001', 'Inpari 7'),
+('VP002', 'TP001', 'Inpari 8'),
+('VP002', 'TP001', 'Inpari 9'),
+('VP002', 'TP001', 'Inpari 10'),
+('VP002', 'TP001', 'Inpari 11'),
+('VP002', 'TP001', 'Inpari 12'),
+('VP002', 'TP001', 'Inpari 13'),
+('VP002', 'TP001', 'Inpari 14'),
+('VP002', 'TP001', 'Inpari 15'),
+('VP002', 'TP001', 'Inpari 16'),
+('VP002', 'TP001', 'Inpari 17'),
+('VP002', 'TP001', 'Inpari 18'),
+('VP002', 'TP001', 'Inpari 19'),
+('VP002', 'TP001', 'Inpari 20'),
+('VP002', 'TP001', 'Inpari 21'),
+('VP002', 'TP001', 'Inpari 31'),
+('VP002', 'TP001', 'Inpari 33'),
+('VP002', 'TP001', 'Inpari 34 Salin Agri'),
+('VP002', 'TP001', 'Inpari 35 Salin Agri'),
+('VP003', 'TP001', 'Gropak (Kulon Progo)'),
+('VP003', 'TP001', 'Indramayu'),
+('VP003', 'TP001', 'Dharma Ayu'),
+('VP003', 'TP001', 'Srimulih'),
+('VP003', 'TP001', 'Andel Jaran'),
+('VP003', 'TP001', 'Merong'),
+('VP003', 'TP001', 'Gundelan'),
+('VP003', 'TP001', 'Marong'),
+('VP003', 'TP001', 'Simenep'),
+('VP003', 'TP001', 'Ketan Lusi'),
+('VJ001', 'TP002', 'Srikandi Kuning 1'),
+('VJ001', 'TP002', 'Srikandi Putih 1'),
+('VJ001', 'TP002', 'Bima 12Q'),
+('VJ001', 'TP002', 'Bima 13Q'),
+('VJ001', 'TP002', 'Bima Putih 1'),
+('VJ001', 'TP002', 'Bima Putih 2'),
+('VJ002', 'TP002', 'Provit A1'),
+('VJ002', 'TP002', 'Provit A2'),
+('VJ002', 'TP002', 'Bima Provit A1'),
+('VJ003', 'TP002', 'Pulut URI 1'),
+('VJ003', 'TP002', 'Pulut URI 2'),
+('VJ003', 'TP002', 'Pulut URI 3H'),
+('VJ004', 'TP002', 'Srikandi Ungu 1'),
+('VJ004', 'TP002', 'Fancy 111');
 
 --
 -- Indexes for dumped tables
@@ -500,11 +655,16 @@ ALTER TABLE `tb_jenisiklim`
   ADD PRIMARY KEY (`id_iklim`);
 
 --
+-- Indexes for table `tb_jenis_varietas`
+--
+ALTER TABLE `tb_jenis_varietas`
+  ADD PRIMARY KEY (`id_jenis_varietas`);
+
+--
 -- Indexes for table `tb_kelebihan_kekurangan`
 --
 ALTER TABLE `tb_kelebihan_kekurangan`
-  ADD UNIQUE KEY `id_tanamanpangan_2` (`id_tanamanpangan`),
-  ADD KEY `id_tanamanpangan` (`id_tanamanpangan`),
+  ADD KEY `id_tanamanpangan` (`id_tanamanpangan`,`id_varietas`),
   ADD KEY `id_varietas` (`id_varietas`);
 
 --
@@ -534,7 +694,7 @@ ALTER TABLE `tb_tanamanpangan`
 -- Indexes for table `tb_varietas`
 --
 ALTER TABLE `tb_varietas`
-  ADD PRIMARY KEY (`id_varietas`),
+  ADD KEY `id_jenis_varietas` (`id_jenis_varietas`,`id_tanamanpangan`),
   ADD KEY `id_tanamanpangan` (`id_tanamanpangan`);
 
 --
@@ -571,6 +731,13 @@ ALTER TABLE `tb_keterangan`
   ADD CONSTRAINT `tb_keterangan_ibfk_1` FOREIGN KEY (`id_tanamanpangan`) REFERENCES `tb_tanamanpangan` (`id_tanamanpangan`),
   ADD CONSTRAINT `tb_keterangan_ibfk_2` FOREIGN KEY (`id_iklim`) REFERENCES `tb_jenisiklim` (`id_iklim`),
   ADD CONSTRAINT `tb_keterangan_ibfk_3` FOREIGN KEY (`id_daerah`) REFERENCES `tb_daerahrawan` (`id_daerah`);
+
+--
+-- Constraints for table `tb_varietas`
+--
+ALTER TABLE `tb_varietas`
+  ADD CONSTRAINT `tb_varietas_ibfk_1` FOREIGN KEY (`id_jenis_varietas`) REFERENCES `tb_jenis_varietas` (`id_jenis_varietas`),
+  ADD CONSTRAINT `tb_varietas_ibfk_2` FOREIGN KEY (`id_tanamanpangan`) REFERENCES `tb_tanamanpangan` (`id_tanamanpangan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
